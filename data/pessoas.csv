@@ -1,0 +1,5 @@
+id;tipo;nome;cpf;dataNascimento;telefone;email;extra1;extra2
+1;PACIENTE;Juliana Melo;111.111.111-11;1990-05-10;99991111;juliana@externo.com;EXTERNO;
+2;PACIENTE;Alex Brito;222.222.222-22;2000-01-20;99992222;alex@faculdade.com;INTERNO;
+4;FUNCIONARIO;João Júlio;444.444.444-44;2002-11-30;99994444;joaojulio@estagio.com;Estagiário;RA 12345
+3;FUNCIONARIO;Dr. Carlos Lima;333.333.333-33;1975-08-05;98888-7777;carlos.lima@clinica.com;Supervisor;CRM/PB 123456
