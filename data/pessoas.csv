@@ -1,5 +1,6 @@
 id;tipo;nome;cpf;dataNascimento;telefone;email;extra1;extra2
-1;PACIENTE;Juliana Melo;111.111.111-11;1990-05-10;99991111;juliana@externo.com;EXTERNO;
-2;PACIENTE;Alex Brito;222.222.222-22;2000-01-20;99992222;alex@faculdade.com;INTERNO;
-4;FUNCIONARIO;João Júlio;444.444.444-44;2002-11-30;99994444;joaojulio@estagio.com;Estagiário;RA 12345
-3;FUNCIONARIO;Dr. Carlos Lima;333.333.333-33;1975-08-05;98888-7777;carlos.lima@clinica.com;Supervisor;CRM/PB 123456
+1;PACIENTE;Alex de Brito;111.111.111-11;1983-10-18;83999999999;alex@interno.com;INTERNO;
+2;PACIENTE;Juliana de Melo;222.222.222-22;1997-01-17;83999999990;juliana@externa.com;EXTERNO;
+3;FUNCIONARIO;Dr. João de Melo;333.333.333-33;1981-03-27;83999999991;joao.melo@clinica.com;Supervisor;CRM/PB 123456
+4;FUNCIONARIO;Paloma Santos;444.444.444-44;2000-01-01;83999999992;paloma.santos@estagio.com;Estagiário;RA 12345
+5;FUNCIONARIO;Junior Amorim;999.999.999-99;1980-02-02;83999999993;junior@gerencia.com;Gestor Administrativo;MAT987
