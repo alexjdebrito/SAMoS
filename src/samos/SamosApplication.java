@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors; // Necessário se for usar import estático ou completo
+import java.util.stream.Collectors;
 
 public class SamosApplication {
 
@@ -70,33 +70,25 @@ public class SamosApplication {
         try {
             System.out.println("--- Carregando/Atualizando dados iniciais da simulação ---\n");
 
-            // Carrega todas as pessoas existentes na memória
             List<Pessoa> pessoasExistentes = pessoaRepository.buscarTodos();
 
-            // --- FUNÇÃO AUXILIAR PARA EVITAR DUPLICAÇÃO POR CPF ---
             java.util.function.Function<Pessoa, Pessoa> buscarOuCriar = (novaPessoa) -> {
                 Optional<Pessoa> existente = pessoasExistentes.stream()
                         .filter(p -> p.getCpf().equals(novaPessoa.getCpf()))
                         .findFirst();
 
                 if (existente.isPresent()) {
-                    // Se a pessoa existe, usa o ID existente para forçar a ATUALIZAÇÃO
                     novaPessoa.setId(existente.get().getId());
                 }
-                // Se não existe, o ID continua null e será gerado um novo ID no .salvar()
                 return pessoaRepository.salvar(novaPessoa);
             };
 
-            // --- 1. PESSOAS ---
-            // Os objetos salvos agora terão o ID do arquivo CSV (se já existirem)
             Pessoa alex = buscarOuCriar.apply(new Paciente(null, "Alex de Brito", "111.111.111-11", LocalDate.of(1983,10,18), "83999999999", "alex@interno.com", Paciente.Tipo.INTERNO));
             Pessoa juliana = buscarOuCriar.apply(new Paciente(null, "Juliana de Melo", "222.222.222-22", LocalDate.of(1997,1,17), "83999999990", "juliana@externa.com", Paciente.Tipo.EXTERNO));
             Pessoa joao = buscarOuCriar.apply(new Supervisor(null, "Dr. João de Melo", "333.333.333-33", LocalDate.of(1981,3,27), "83999999991", "joao.melo@clinica.com", "CRM/PB 123456"));
             Pessoa paloma = buscarOuCriar.apply(new Estagiario(null, "Paloma Santos", "444.444.444-44", LocalDate.of(2000,01,01), "83999999992", "paloma.santos@estagio.com", "RA 12345"));
             Pessoa junior = buscarOuCriar.apply(new Gestor(null, "Junior Amorim", "999.999.999-99", LocalDate.of(1980,02,02), "83999999993", "junior@gerencia.com", "MAT987"));
 
-
-            // --- 2. SALAS (Busca pela Chave de Negócio: Nome da Sala) ---
             Sala sala = new Sala(null, "Consultório 1 (Psico)", "Bloco C", 5);
             salaRepository.buscarTodos().stream()
                     .filter(s -> s.getNome().equals(sala.getNome()))
@@ -105,7 +97,6 @@ public class SamosApplication {
 
             salaRepository.salvar(sala); // Salva/Atualiza
 
-            // Re-inicializa o CadastroService (boa prática para garantir o estado)
             cadastroService = new CadastroService(pessoaRepository);
 
             System.out.println("✅ Dados iniciais carregados/atualizados (" + pessoaRepository.buscarTodos().size() + " Pessoas, 1 Sala).");

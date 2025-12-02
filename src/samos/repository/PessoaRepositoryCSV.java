@@ -147,7 +147,6 @@ public class PessoaRepositoryCSV {
                 String cargo = (c.length > 7) ? c[7] : null;
                 String reg = (c.length > 8) ? c[8] : null;
 
-                // decide se é supervisor/estagiario por cargo
                 if ("Supervisor".equalsIgnoreCase(cargo))
                     return new Supervisor(id, nome, cpf, data, telefone, email, reg);
                 if ("Estagiário".equalsIgnoreCase(cargo) || "Estagiario".equalsIgnoreCase(cargo))
@@ -156,7 +155,7 @@ public class PessoaRepositoryCSV {
                     return new Gestor(id, nome, cpf, data, telefone, email, reg);
                 return new Funcionario(id, nome, cpf, data, telefone, email, reg, cargo);
             }
-            // Se chegou aqui, é um tipo FUNCIONARIO sem cargo específico.
+
             return null;
         } catch (Exception e) {
             System.err.println("Erro ao converter linha para Pessoa: " + e.getMessage() + " -> " + linha);

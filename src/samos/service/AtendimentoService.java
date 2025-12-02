@@ -15,13 +15,13 @@ public class AtendimentoService {
         this.registroRepository = registroRepository;
     }
     public Atendimento agendarAtendimento(Paciente paciente, Funcionario profissional, LocalDateTime dataHora, String tipoServico, Sala sala){
-        // verifica conflito profissional
+
         List<Atendimento> conflitos = repository.buscarPorProfissionalEDataHora(profissional, dataHora);
         if(!conflitos.isEmpty()) throw new IllegalArgumentException("Erro de Agendamento: O profissional já possui agendamento neste horário.");
-        // verifica conflito sala
+
         List<Atendimento> conflitosSala = repository.buscarPorSalaEDataHora(sala, dataHora);
         if(!conflitosSala.isEmpty()) throw new IllegalArgumentException("Erro de Agendamento: A sala já está reservada para o horário.");
-        // data futura
+
         if(dataHora.isBefore(LocalDateTime.now())) throw new IllegalArgumentException("Erro de Agendamento: Não é possível agendar para o passado.");
         if(!sala.isReservavel()) throw new IllegalArgumentException("Erro de Agendamento: A sala está em manutenção e não pode ser reservada.");
         Atendimento novo = new Atendimento(null,paciente,profissional,dataHora,tipoServico,sala);
